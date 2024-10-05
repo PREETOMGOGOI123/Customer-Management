@@ -1,0 +1,12 @@
+{
+    "enquiries": [ 
+    {
+        "Type Of Bike": "Mountain Bike",
+        "Customer Name": "Jhon Doe", 
+        "CustomerPhoneNumber": "700284347",
+        "Customer Address": "123 Main street",
+        "Rental Status": true,
+        "Enquiry Status": false
+    }
+]
+}

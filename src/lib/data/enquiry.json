@@ -1,0 +1,124 @@
+{
+    "enquiries": [ 
+    {   
+        "id": 1,
+        "typeOfBike": "Mountain Bike",
+        "customerName": "John Doe", 
+        "customerPhoneNumber": "700284347",
+        "customerAddress": "123 Main Street",
+        "rentalStatus": false,
+        "rentalReturnDate": "2024-02-01",
+        "isReturned": true
+    },
+    {   
+        "id": 2,
+        "typeOfBike": "Road Bike",
+        "customerName": "Jane Smith", 
+        "customerPhoneNumber": "701234567",
+        "customerAddress": "456 Elm Avenue",
+        "rentalStatus": false,
+        "enquiryStatus": true,
+        "rentalReturnDate": null,
+        "isReturned": false
+    },
+    {   
+        "id": 3,
+        "typeOfBike": "Electric Bike",
+        "customerName": "Mike Johnson", 
+        "customerPhoneNumber": "702345678",
+        "customerAddress": "789 Oak Lane",
+        "rentalStatus": true,
+        "enquiryStatus": false,
+        "rentalReturnDate": "2024-02-15",
+        "isReturned": false
+    },
+    {   
+        "id": 4,
+        "typeOfBike": "Hybrid Bike",
+        "customerName": "Emily Brown", 
+        "customerPhoneNumber": "703456789",
+        "customerAddress": "101 Pine Road",
+        "rentalStatus": false,
+        "enquiryStatus": true,
+        "rentalReturnDate": null,
+        "isReturned": false
+    },
+    {   
+        "id": 5,
+        "typeOfBike": "BMX Bike",
+        "customerName": "Alex Wilson", 
+        "customerPhoneNumber": "704567890",
+        "customerAddress": "202 Cedar Street",
+        "rentalStatus": true,
+        "enquiryStatus": false,
+        "rentalReturnDate": "2024-02-10",
+        "isReturned": false
+    },
+    {   
+        "id": 6,
+        "typeOfBike": "Cruiser Bike",
+        "customerName": "Sarah Davis", 
+        "customerPhoneNumber": "705678901",
+        "customerAddress": "303 Maple Drive",
+        "rentalStatus": false,
+        "enquiryStatus": true,
+        "rentalReturnDate": null,
+        "isReturned": false
+    },
+    {   
+        "id": 7,
+        "typeOfBike": "Folding Bike",
+        "customerName": "Tom Anderson", 
+        "customerPhoneNumber": "706789012",
+        "customerAddress": "404 Birch Boulevard",
+        "rentalStatus": true,
+        "enquiryStatus": false,
+        "rentalReturnDate": "2024-02-20",
+        "isReturned": false
+    },
+    {   
+        "id": 8,
+        "typeOfBike": "Tandem Bike",
+        "customerName": "Lisa Taylor", 
+        "customerPhoneNumber": "707890123",
+        "customerAddress": "505 Willow Way",
+        "rentalStatus": false,
+        "enquiryStatus": true,
+        "rentalReturnDate": null,
+        "isReturned": false
+    },
+    {   
+        "id": 9,
+        "typeOfBike": "Recumbent Bike",
+        "customerName": "Chris Martin", 
+        "customerPhoneNumber": "708901234",
+        "customerAddress": "606 Spruce Street",
+        "rentalStatus": true,
+        "enquiryStatus": false,
+        "rentalReturnDate": "2024-02-25",
+        "isReturned": false
+    },
+    {   
+        "id": 10,
+        "typeOfBike": "City Bike",
+        "customerName": "Emma White", 
+        "customerPhoneNumber": "709012345",
+        "customerAddress": "707 Ash Avenue",
+        "rentalStatus": false,
+        "enquiryStatus": true,
+        "rentalReturnDate": null,
+        "isReturned": false
+    },
+    {   
+        "id": 11,
+        "typeOfBike": "Gravel Bike",
+        "customerName": "David Lee", 
+        "customerPhoneNumber": "710123456",
+        "customerAddress": "808 Redwood Road",
+        "rentalStatus": true,
+        "enquiryStatus": false,
+        "rentalReturnDate": "2024-03-01",
+        "isReturned": false
+    }
+]
+}
