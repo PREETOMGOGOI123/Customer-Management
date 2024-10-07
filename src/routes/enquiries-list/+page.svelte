@@ -1,0 +1,3 @@
+<h1>
+    Click on the enquiry to view the details...
+</h1>

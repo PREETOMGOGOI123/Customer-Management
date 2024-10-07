@@ -5,8 +5,8 @@
         </div>
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1">
-                <li><a class="text-primary-content" href="/enquiry-lists">Enquiry Lists</a></li>
-                <li><a class="text-primary-content" href="/new-enquiry">New Enquiry</a></li>
+                <li><a class="text-primary-content" href="/">New Enquiry</a></li>
+                <li><a class="text-primary-content" href="/enquiries-list">Enquiry Lists</a></li>
                 <li><a class="text-primary-content">Login</a></li>
             </ul>
         </div>
