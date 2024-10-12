@@ -1,38 +1,20 @@
-# create-svelte
+# Customer Enquiry App 
+This repository contains codes for a customer enquiry app that is still in the process of building.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+## Features 
+- `Sveltekit` - built with technology
+- `json file` i.e - `enquiry.json` to handle data
+-  ### UI  - Tailwindcss and  DaisyUi components
 
-## Creating a project
+## Code Structure
+- The data from `enquiry.json` is fetched into `src/routes/api/server.js`
+- The project has to main routes. - `new-enquries` & `enquiries-list`
+- The homepage route is the `new-enquiry` Route or simply `/`
+- `enquiries-list` - Will fetch and render the data from `src/routes/api/server.js` and will render the data in a Sidebar component.
+- `enquiries-list` has a nested routes folder that needs to dynamically render the corresponding data when clicked on respective item inside the sidebar component
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Istruction to run the app :
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- Download the files from this repository
+- Run pnpm install
+- You can run the app in localhost
