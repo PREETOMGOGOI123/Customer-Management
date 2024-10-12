@@ -1,16 +1,21 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="lofi">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+
 >
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%sveltekit.head%
 	</head>
-	<div style="display: contents">%sveltekit.body%</div>
 	<body data-sveltekit-preload-data="hover" class="h-[100vh]">
+		<div style="display: contents">%sveltekit.body%</div>
+		<script>
+			// Initialize theme from localStorage
+			const savedTheme = localStorage.getItem('theme') || 'lofi';
+			document.documentElement.setAttribute('data-theme', savedTheme);
+		</script>
 	</body>
 </html>
