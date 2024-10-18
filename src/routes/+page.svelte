@@ -1,167 +1,129 @@
 <script>
     import "../app.css";
+    import Login from "./components/Login/Login.svelte";
     import Header from "./components/Header.svelte";
     import NewEnquiry from "./components/NewEnquiry/NewEnquiry.svelte";
-    import Login from "./components/Login/Login.svelte";
     import AllEnquriries from "./components/AllEnquiries/AllEnquriries.svelte";
+    import RentalData from "./components/RentalData/RentalData.svelte"
 
-    let menuItems = ["New Enquiry", "All Enquiries", "Logout"];
+    import { onMount } from "svelte";
+
+    let menuItems = ["New Enquiry", "All Enquiries", "Rental Data", "Logout"];
     let activeMenuItem = "New Enquiry";
     let activeEnquiryItem;
-    let currentEmployee = "";
+    let currentEmployee = [];
+    
+    $: edit = false
 
-    let enquiries = [
-        {
-            enquiryId: "EQ001",
-            bikeQuantity: 8,
-            bikeType: "Mountain",
-            startDate: "2023-07-01",
-            endDate: "2023-07-05",
-            customerName: "John Doe",
-            customerAddress: "123 Main St, Anytown, USA",
-            customerContact: "9876543210",
-            noOfDays: 5,
-            enquiryStatus: "On Rent",
-        },
-        {
-            enquiryId: "EQ002",
-            bikeQuantity: 1,
-            bikeType: "Road",
-            startDate: "2023-07-10",
-            endDate: "2023-07-12",
-            customerName: "Jane Smith",
-            customerAddress: "456 Elm St, Othertown, USA",
-            customerContact: "8765432109",
-            noOfDays: 3,
-            enquiryStatus: "On Enquiry",
-        },
-        {
-            enquiryId: "EQ003",
-            bikeQuantity: 3,
-            bikeType: "Electric",
-            startDate: "2023-07-15",
-            endDate: "2023-07-20",
-            customerName: "Alice Johnson",
-            customerAddress: "789 Oak St, Newcity, USA",
-            customerContact: "7654321098",
-            noOfDays: 6,
-            enquiryStatus: "On Rent",
-        },
-        {
-            enquiryId: "EQ004",
-            bikeQuantity: 2,
-            bikeType: "Hybrid",
-            startDate: "2023-07-22",
-            endDate: "2023-07-25",
-            customerName: "Bob Williams",
-            customerAddress: "101 Pine St, Greenville, USA",
-            customerContact: "6543210987",
-            noOfDays: 4,
-            enquiryStatus: "On Enquiry",
-        },
-        {
-            enquiryId: "EQ005",
-            bikeQuantity: 1,
-            bikeType: "City",
-            startDate: "2023-07-28",
-            endDate: "2023-07-30",
-            customerName: "Carol Brown",
-            customerAddress: "202 Maple St, Riverside, USA",
-            customerContact: "5432109876",
-            noOfDays: 3,
-            enquiryStatus: "On Rent",
-        },
-        {
-            enquiryId: "EQ006",
-            bikeQuantity: 4,
-            bikeType: "Mountain",
-            startDate: "2023-08-01",
-            endDate: "2023-08-07",
-            customerName: "David Miller",
-            customerAddress: "303 Cedar St, Hilltown, USA",
-            customerContact: "4321098765",
-            noOfDays: 7,
-            enquiryStatus: "On Enquiry",
-        },
-        {
-            enquiryId: "EQ007",
-            bikeQuantity: 2,
-            bikeType: "Tandem",
-            startDate: "2023-08-10",
-            endDate: "2023-08-12",
-            customerName: "Emma Davis",
-            customerAddress: "404 Birch St, Lakeside, USA",
-            customerContact: "3210987654",
-            noOfDays: 3,
-            enquiryStatus: "On Rent",
-        },
-        {
-            enquiryId: "EQ008",
-            bikeQuantity: 1,
-            bikeType: "Folding",
-            startDate: "2023-08-15",
-            endDate: "2023-08-18",
-            customerName: "Frank Wilson",
-            customerAddress: "505 Walnut St, Mountainview, USA",
-            customerContact: "2109876543",
-            noOfDays: 4,
-            enquiryStatus: "On Enquiry",
-        },
-        {
-            enquiryId: "EQ009",
-            bikeQuantity: 3,
-            bikeType: "Road",
-            startDate: "2023-08-20",
-            endDate: "2023-08-25",
-            customerName: "Grace Taylor",
-            customerAddress: "606 Chestnut St, Seaside, USA",
-            customerContact: "1098765432",
-            noOfDays: 6,
-            enquiryStatus: "On Rent",
-        },
-        {
-            enquiryId: "EQ010",
-            bikeQuantity: 2,
-            bikeType: "Electric",
-            startDate: "2023-08-28",
-            endDate: "2023-09-01",
-            customerName: "Henry Anderson",
-            customerAddress: "707 Elm St, Valleytown, USA",
-            customerContact: "0987654321",
-            noOfDays: 5,
-            enquiryStatus: "On Enquiry",
-        },
-    ];
+    $: enquiries = [];
+
+    function handleInitiateEdit() {
+        edit = true;
+        console.log('Edit initiated:', edit);
+    }
+
+    function handleCancelEdit() {
+        edit = false;
+        console.log('Edit cancelled:', edit);
+    }
 
     function handleMenuItemChange(e) {
         activeMenuItem = e.detail;
-        if(activeMenuItem === "Logout"){
-            currentEmployee = "";
-            activeMenuItem = "New Enquiry"
+        if (activeMenuItem === "Logout") {
+            currentEmployee = [];
+            activeMenuItem = "New Enquiry";
         }
     }
 
-    function handleEnquirySubmit(event) {
+    function handleSelectedEnquiry(e) {
+        activeEnquiryItem = e.detail;
+        allowEdit = false;
+    }
+
+    function handleEnterEmployeeId(e) {
+        currentEmployee = [e.detail];
+        console.log(currentEmployee);
+    }
+
+    onMount(async () => {
+        await loadEnquiries();
+    });
+    async function loadEnquiries() {
+        const response = await fetch("./api/enquiries");
+        enquiries = await response.json();
+    }
+
+    async function handleEnquirySubmit(event) {
+        let enquiryData = event.detail;
+
+        console.log("Submitting enquiry:", enquiryData); // Log the data being sent
+
+        try {
+            const response = await fetch("./api/enquiries", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(enquiryData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(
+                    `Failed to submit enquiry: ${errorData.error || response.statusText}`,
+                );
+            }
+
+            const createdEnquiry = await response.json();
+            console.log("Received response:", createdEnquiry); // Log the server response
+
+            enquiries = [createdEnquiry, ...enquiries];
+            activeMenuItem = "All Enquiries";
+        } catch (error) {
+            console.error("Error submitting enquiry:", error);
+            // Handle error (e.g., show an error message to the user)
+            alert(`Failed to submit enquiry: ${error.message}`);
+        }
+        activeEnquiryItem = enquiries[0].enquiryId
+    }
+
+    /* function handleEnquirySubmit(event) {
         let enquiryData = event.detail;
         enquiries = [enquiryData, ...enquiries];
         activeMenuItem = "All Enquiries";
     }
+*/
 
-    function handleClickedEnquiry(e) {
-        activeEnquiryItem = e.detail;
+    function handleDeleteEnquiry(e) {
+        const enquiryIdToDelete = e.detail;
+        enquiries = enquiries.filter(
+            (enquiry) => enquiry.enquiryId !== enquiryIdToDelete,
+        );
+        if (activeEnquiryItem === enquiryIdToDelete) {
+            activeEnquiryItem =
+                enquiries.length > 0 ? enquiries[0].enquiryId : null;
+        }
+    }
+ 
+
+    function handleSubmitEdittedData(e) {
+        let enquiryToEditIndex = enquiries.findIndex(
+            (enquiry) => enquiry.enquiryId === e.detail.enquiryId,
+        );
+
+        enquiries[enquiryToEditIndex] = e.detail;
+        enquiries = [...enquiries]; // Trigger reactivity
+        edit = false;
+        console.log(edit)
     }
 
-    function handleEnterEmployeeId(e) {
-        currentEmployee = e.detail
-        console.log(currentEmployee)
-    }
 </script>
 
 {#if currentEmployee.length === 0}
     <Login on:handleEmployees={handleEnterEmployeeId} />
 {:else}
     <div
-        class="h-fit w-full container mx-auto relative my-10 rounded-b-lg shadow-lg shadow-indigo-600"
+        class="h-full w-full mx-auto relative rounded-b-lg shadow-lg shadow-indigo-600 overflow-auto"
     >
         <Header
             {menuItems}
@@ -171,14 +133,25 @@
         />
         <div class="w-full m-auto p-10">
             {#if activeMenuItem === "New Enquiry"}
-                <NewEnquiry on:submitEnquiryData={handleEnquirySubmit} {currentEmployee}/>
+                <NewEnquiry
+                    on:submitEnquiryData={handleEnquirySubmit}
+                    {currentEmployee}
+                />
             {:else if activeMenuItem === "All Enquiries"}
                 <AllEnquriries
                     {enquiries}
-                    on:registeredEnquiryClicked={handleClickedEnquiry}
+                    on:registeredEnquiryClicked={handleSelectedEnquiry}
+                    on:deleteEnquiry={handleDeleteEnquiry}
+                    on:submitEnquiryData={handleSubmitEdittedData}
+                    on:initiateEdit={handleInitiateEdit}
+                    on:cancelEdit={handleCancelEdit}
                     {activeEnquiryItem}
+                    {currentEmployee}
+                    {edit}
                 />
-            {:else if activeMenuItem === "Login"}
+            {:else if activeMenuItem === "Rental Data"}
+            <RentalData {enquiries}/>
+            {:else if activeMenuItem === "Logout"}
                 <Login />
             {/if}
         </div>

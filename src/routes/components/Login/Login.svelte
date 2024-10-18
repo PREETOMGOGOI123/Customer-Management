@@ -26,7 +26,7 @@
             Enter Your <strong>Employee Id</strong>
         </h1>
         <input
-            type="text"
+            type="password"
             class="input input-bordered text-primary text-center w-[20rem] focus:outline-none uppercase"
             bind:value={employeeId}
         />
