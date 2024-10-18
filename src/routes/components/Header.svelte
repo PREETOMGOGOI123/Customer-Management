@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="flex items-center">
-                <span class="font-bold text-lg">Total Bikes on Rent: </span>
+                <span class="font-bold text-lg">Total Active Rent: </span>
                 <span class="ml-2 text-xl font-bold">{totalBikesOnRent}</span>
             </div>
         </div>
